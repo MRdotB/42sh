@@ -6,18 +6,21 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 09:14:35 by thifranc          #+#    #+#             */
-/*   Updated: 2016/04/28 16:23:00 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/04/28 16:55:17 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include "42sh.h"
 
-//comd pwd a refaire aussi bonus
 
+int		main(void)
+{
+	char	*line;
+
+	while (write(1, PROMPT, 3) && (ft_gnl(0, &line) != 0))
+		router(line);
+}
+/*
 int		main(int ac, char **av)
 {
 	int		fd;
@@ -55,3 +58,4 @@ int		main(int ac, char **av)
 	close(fd);
 	return (0);
 }
+*/
