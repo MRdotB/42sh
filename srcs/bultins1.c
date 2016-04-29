@@ -6,11 +6,13 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:10:46 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/04/29 14:25:22 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/04/29 15:43:32 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
+
+char	**env_cpy;
 
 void	bc_cd(char **path)
 {
@@ -18,6 +20,12 @@ void	bc_cd(char **path)
 }
 void	bc_exit(char **path)
 {
+	int	i;
+
+	i = 0;
+	while (env_cpy[i])
+		free(env_cpy[i++]);
+	free(env_cpy);
 	if (*path)
 		exit(0);
 }
