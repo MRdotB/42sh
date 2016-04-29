@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/27 09:14:35 by thifranc          #+#    #+#             */
-/*   Updated: 2016/04/28 16:55:17 by bchaleil         ###   ########.fr       */
+/*   Created: 2016/04/29 12:42:18 by bchaleil          #+#    #+#             */
+/*   Updated: 2016/04/29 12:42:44 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
-
 
 int		main(void)
 {
@@ -20,6 +19,7 @@ int		main(void)
 	while (write(1, PROMPT, 3) && (ft_gnl(0, &line) != 0))
 		router(line);
 }
+
 /*
 int		main(int ac, char **av)
 {
