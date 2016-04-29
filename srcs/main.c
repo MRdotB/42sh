@@ -6,18 +6,36 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 12:42:18 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/04/29 12:42:44 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/04/29 19:01:53 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
+extern char	**environ;
+char	**env_cpy;
+
 int		main(void)
 {
 	char	*line;
+	int		prompt_size;
+	int		i;
+	int		equal_pos;
+	t_binary *b;
 
-	while (write(1, PROMPT, 3) && (ft_gnl(0, &line) != 0))
+	i = 0;
+	while (environ[i])
+	{
+		equal_pos = ft_strindexof(environ[i], '=');
+		if (ft_strncmp("PATH", environ[i], equal_pos - 1) == 0)
+			b = get_binary(environ[i] + equal_pos);
+		i++;
+	}
+	env_cpy = cpy_env(environ, 0, 0);
+	prompt_size = ft_strlen(PROMPT);
+	while (write(1, PROMPT, prompt_size) && (ft_gnl(0, &line) != 0))
 		router(line);
+	return (0);
 }
 
 /*
