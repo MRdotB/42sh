@@ -18,16 +18,17 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <sys/syslimits.h>
+//#include <sys/syslimits.h>
+#include <linux/limits.h>
 
 # define PROMPT "$> "
 
-typedef struct		s_binary
+typedef struct		s_env
 {
-	char			*name;
-	char			*path;
-	struct s_binary	*next;
-}					t_binary;
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
 void	router(char *line);
 void	bc_cd(char **path);
@@ -41,7 +42,7 @@ void	bc_unsetenv(char **path);
 
 void	bc_error(char *error_msg);
 char	**cpy_env(char **environ, int add, int del);
-t_binary	*get_binary(char *paths);
+void	env_init(void);
 
 
 #endif

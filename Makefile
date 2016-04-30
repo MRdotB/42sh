@@ -18,7 +18,7 @@ LIB				=	$(LIB_PATH)libft.a
 LIB_LINK		=	-L $(LIB_PATH) -lft
 INCLUDES		=	-I ./includes -I ./libft/includes
 SRCS			=	srcs/main.c srcs/router.c srcs/bultins1.c \
-					srcs/bultins2.c srcs/errors.c srcs/lists.c
+					srcs/bultins2.c srcs/errors.c srcs/env_controller.c
 OBJS			=	$(SRCS:srcs/%.c=obj/%.o)
 
 all: obj $(NAME)
@@ -26,7 +26,7 @@ all: obj $(NAME)
 $(LIB):
 	@make -C $(LIB_PATH)
 
-$(NAME): $(LIB) $(OBJS)
+$(NAME): $(OBJS) $(LIB)
 	@cat asciiart
 	$(CC) $(FLAGS) -o $@ $^
 
