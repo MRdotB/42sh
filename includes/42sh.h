@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 15:58:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/04/29 19:06:00 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/02 13:45:47 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-//#include <sys/syslimits.h>
-#include <linux/limits.h>
+#include <sys/syslimits.h>
+//#include <linux/limits.h>
 
 # define PROMPT "$> "
 
@@ -29,6 +29,16 @@ typedef struct		s_env
 	char			*value;
 	struct s_env	*next;
 }					t_env;
+
+
+void	env_init(void);
+char	**env_to_tab(void);
+void	free_double_tab(char **tab);
+void	clean_env(void);
+void	display_env(void);
+void	set_env(char *key, char *value, int overwrite);
+int		get_env(char *key);
+int		unset_env(char *key);
 
 void	router(char *line);
 void	bc_cd(char **path);
