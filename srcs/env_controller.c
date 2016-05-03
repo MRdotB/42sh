@@ -13,7 +13,6 @@
 #include "42sh.h"
 
 t_env		*g_head;
-extern char	**environ;
 
 static t_env	*new_elem(char *env)
 {
@@ -81,14 +80,14 @@ void			free_double_tab(char **tab)
 	free(tab);
 }
 
-void			env_init(void)
+void			env_init(char **env)
 {
 	int		i;
 
 	g_head = NULL;
 	i = 0;
-	while (environ[i])
+	while (env[i])
 		i++;
 	while (i > 0)
-		g_head = push_front(g_head, new_elem(environ[--i]));
+		g_head = push_front(g_head, new_elem(env[--i]));
 }
