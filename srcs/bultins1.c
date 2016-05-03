@@ -12,7 +12,8 @@
 
 #include "42sh.h"
 
-t_env	*g_head;
+t_env			*g_head;
+hashtable_t		*g_hashtable;
 
 void	bc_cd(char **path)
 {
@@ -24,6 +25,7 @@ void	bc_exit(char **path)
 	if (*path)
 	{
 		clean_env();
+		ht_free(g_hashtable);
 		exit(0);
 	}
 }
