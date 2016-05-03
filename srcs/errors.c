@@ -19,3 +19,12 @@ void	bc_error(char *error_msg)
 	ft_putstr_fd(RESET, 2);
 	ft_putchar('\n');
 }
+
+void	bc_error_file(char *error_msg, char *file)
+{
+	ft_putstr_fd(RED, 2);
+	ft_putstr_fd(error_msg, 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putchar('\n');
+}
