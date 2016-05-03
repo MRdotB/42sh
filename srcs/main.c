@@ -12,26 +12,14 @@
 
 #include "42sh.h"
 
-extern char	**environ;
-char	**env_cpy;
-
-int		main(void)
+int		main(int ac, char **av, char **env)
 {
 	char	*line;
 	int		prompt_size;
-	int		i;
-	int		equal_pos;
-	t_binary *b;
 
-	i = 0;
-	while (environ[i])
-	{
-		equal_pos = ft_strindexof(environ[i], '=');
-		if (ft_strncmp("PATH", environ[i], equal_pos - 1) == 0)
-			b = get_binary(environ[i] + equal_pos);
-		i++;
-	}
-	env_cpy = cpy_env(environ, 0, 0);
+	if (ac && *av)
+		env_init(env);
+	hash_binaries();
 	prompt_size = ft_strlen(PROMPT);
 	while (write(1, PROMPT, prompt_size) && (ft_gnl(0, &line) != 0))
 		router(line);
