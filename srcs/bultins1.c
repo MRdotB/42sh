@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:10:46 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 15:30:03 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 19:12:41 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,42 @@
 t_env			*g_head;
 t_hashtable		*g_hashtable;
 
+void	bc_cd_ex(char *go_to)
+{
+	char	current[PATH_MAX];
+
+	if (go_to == NULL)
+		return (bc_error("cd: File does not exist."));
+	else if (access(go_to, F_OK) == -1)
+		bc_error("cd: File does not exist.");
+	else if (access(go_to, R_OK) == -1)
+		bc_error("cd: Permission denied.");
+	else if (chdir(go_to) == 0)
+	{
+		set_env("OLDPWD", get_env("PWD"));
+		set_env("PWD", getcwd(current, PATH_MAX));
+	}
+	free(go_to);
+}
+
 void	bc_cd(char **path)
 {
-	if ((!path[1] || !ft_strcmp(path[1], "~")) && getenv("HOME"))
-		chdir(getenv("HOME"));
-	else if (path[2])
-		return (bc_error("cd: too much args."));
-	else if (chdir(path[1]) != -1)
-		return ;
+	char	*home;
+	char	*go_to;
+
+	go_to = NULL;
+	home = get_env("HOME");
+	if (path[2])
+		bc_error("cd: Too much args. usage: cd dirname");
+	else if (!path[1] || (path[1][0] == '~' && path[1][1] == '\0'))
+		go_to = ft_strdup(home);
+	else if (path[1][0] == '-' && path[1][1] == '\0')
+		go_to = ft_strdup(get_env("OLDPWD"));
+	else if (ft_strncmp("~/", path[1], 2) == 0)
+		go_to = ft_concat(home, path[1] + 1, 0);
 	else
-	{
-		if (access(path[0], F_OK) == -1)
-			bc_error("cd: File does not exist.");
-		else if (access(path[0], R_OK) == -1)
-			bc_error("cd: Permission denied.");
-	}
+		go_to = ft_strdup(path[1]);
+	bc_cd_ex(go_to);
 }
 
 void	bc_exit(char **path)
@@ -37,7 +58,11 @@ void	bc_exit(char **path)
 	int	e;
 
 	e = 0;
-	if (*path)
+	if (!path[1])
+		exit(e);
+	else if (path[2])
+		bc_error("exit: Too much args. usage: exit value");
+	else
 	{
 		clean_env();
 		ht_free(g_hashtable);
@@ -57,15 +82,15 @@ void	bc_clear(char **path)
 
 	clear_screen_ansi = "\e[1;1H\e[2J";
 	if (path[1])
-		return (bc_error("clear: too much args."));
+		return (bc_error("clear: Too much args. usage: clear"));
 	ft_putstr_fd(clear_screen_ansi, STDOUT_FILENO);
 }
 
 void	bc_pwd(char **path)
 {
-	char current[PATH_MAX];
+	char	current[PATH_MAX];
 
 	if (path[1])
-		return (bc_error("pwd: too much args."));
+		return (bc_error("pwd: Too much args."));
 	ft_putendl(getcwd(current, PATH_MAX));
 }
