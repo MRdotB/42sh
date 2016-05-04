@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 11:22:19 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 12:58:29 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 16:56:57 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	set_env(char *key, char *value)
 {
 	t_env	*cpy;
 
+	if (value == NULL)
+		return ;
 	cpy = g_head;
 	while (cpy)
 	{
@@ -65,7 +67,7 @@ void	set_env(char *key, char *value)
 	g_head = cpy;
 }
 
-int		get_env(char *key)
+char	*get_env(char *key)
 {
 	t_env	*cpy;
 
@@ -73,13 +75,10 @@ int		get_env(char *key)
 	while (cpy)
 	{
 		if (ft_strcmp(cpy->key, key) == 0)
-		{
-			ft_putendl(cpy->value);
-			return (1);
-		}
+			return (cpy->value);
 		cpy = cpy->next;
 	}
-	return (0);
+	return (NULL);
 }
 
 int		unset_env(char *key)
