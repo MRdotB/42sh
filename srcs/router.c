@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 16:39:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/04/29 17:03:24 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 11:21:47 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void		router(char *line)
 {
 	char		**entry;
 
+	if (*line == '\0')
+		return ;
 	entry = ft_strsplit(line, ' ');
 	if (!builtin(entry))
 		binary(entry);
