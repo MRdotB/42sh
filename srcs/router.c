@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 16:39:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 19:25:16 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 19:28:14 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ t_hashtable	*g_hashtable;
 static int	builtin(char **entry)
 {
 	int			i;
-	static void	(*f[9])(char **entry) =
+	static void	(*f[8])(char **entry) =
 	{ bc_cd, bc_exit, bc_clear, bc_pwd, bc_env, bc_getenv, bc_setenv,
-		bc_unsetenv, bc_unsetenv };
+		bc_unsetenv };
 	static char	*bultins[] =
 	{ "cd", "exit", "clear", "pwd", "env", "getenv", "setenv",
-		"unsetenv", "unset" };
+		"unsetenv" };
 
 	i = 0;
-	while (i < 9)
+	while (i < 8)
 	{
 		if (ft_strcmp(bultins[i], entry[0]) == 0)
 		{
