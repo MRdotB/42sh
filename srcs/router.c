@@ -6,19 +6,20 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 16:39:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 11:21:47 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 13:16:29 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "bcsh.h"
 
-hashtable_t	*g_hashtable;
+t_hashtable	*g_hashtable;
 
 static int	builtin(char **entry)
 {
 	int			i;
 	static void	(*f[8])(char **entry) =
-	{ bc_cd, bc_exit, bc_clear, bc_pwd, bc_env, bc_getenv, bc_setenv, bc_unsetenv };
+	{ bc_cd, bc_exit, bc_clear, bc_pwd, bc_env, bc_getenv, bc_setenv,
+		bc_unsetenv };
 	static char	*bultins[] =
 	{ "cd", "exit", "clear", "pwd", "env", "getenv", "setenv", "unsetenv" };
 
@@ -39,20 +40,19 @@ static int	binary(char **entry)
 {
 	pid_t	father;
 	char	**env;
+	char	*value;
 
-	if (ht_get(g_hashtable, entry[0]) == NULL)
+	if ((value = ht_get(g_hashtable, entry[0])) == NULL)
 	{
 		bc_error_file("command not found: ", entry[0]);
 		return (0);
 	}
-//	if (access(path, F_OK) == -1 || access(path, X_OK) == -1)
-//		return (0);
 	father = fork();
 	env = env_to_tab();
 	if (father)
 		wait(&father);
 	else
-		execve(ht_get(g_hashtable, entry[0]), entry, env);
+		execve(value, entry, env);
 	free_double_tab(env);
 	return (1);
 }
