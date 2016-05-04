@@ -6,11 +6,11 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 11:22:19 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/02 14:03:22 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 12:58:29 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "bcsh.h"
 
 t_env	*g_head;
 
@@ -42,14 +42,14 @@ void	display_env(void)
 	}
 }
 
-void	set_env(char *key, char *value, int overwrite)
+void	set_env(char *key, char *value)
 {
 	t_env	*cpy;
 
 	cpy = g_head;
 	while (cpy)
 	{
-		if (overwrite && ft_strcmp(cpy->key, key) == 0)
+		if (ft_strcmp(cpy->key, key) == 0)
 		{
 			free(cpy->value);
 			cpy->value = ft_strdup(value);
