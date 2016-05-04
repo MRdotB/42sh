@@ -6,11 +6,11 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:56 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/02 13:57:05 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 12:57:50 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "bcsh.h"
 
 void	bc_env(char **path)
 {
@@ -41,9 +41,9 @@ void	bc_unsetenv(char **path)
 
 void	bc_setenv(char **path)
 {
-	if (path[1] == NULL || path[2] == NULL || path[3] == NULL)
-		return (bc_error("setenv: missing arg."));
-	else if (path[4])
-		return (bc_error("unsetenv: too much args."));
-	set_env(path[1], path[2], ft_atoi(path[3]));
+	if (path[1] == NULL || path[2] == NULL)
+		return (bc_error("setenv: missing arg. usage: setenv var value"));
+	else if (path[3])
+		return (bc_error("unsetenv: too much args. usage: setenv var value"));
+	set_env(path[1], path[2]);
 }

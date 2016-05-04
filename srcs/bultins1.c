@@ -6,18 +6,30 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:10:46 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/02 14:05:11 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 12:58:06 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "bcsh.h"
 
 t_env			*g_head;
-hashtable_t		*g_hashtable;
+t_hashtable		*g_hashtable;
 
 void	bc_cd(char **path)
 {
-	chdir(path[1]);
+	if ((!path[1] || !ft_strcmp(path[1], "~")) && getenv("HOME"))
+		chdir(getenv("HOME"));
+	else if (path[2])
+		return (bc_error("cd: too much args."));
+	else if (chdir(path[1]) != -1)
+		return ;
+	else
+	{
+		if (access(path[0], F_OK) == -1)
+			bc_error("cd: File does not exist.");
+		else if (access(path[0], R_OK) == -1)
+			bc_error("cd: Permission denied.");
+	}
 }
 
 void	bc_exit(char **path)
