@@ -6,33 +6,39 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:30 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/02 18:58:00 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 12:52:18 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
+#ifndef HASHTABLE_H
+# define HASHTABLE_H
+# include <string.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <limits.h>
 
-struct entry_s {
-	char *key;
-	char *value;
-	struct entry_s *next;
+struct		s_entry
+{
+	char			*key;
+	char			*value;
+	struct s_entry	*next;
 };
 
-typedef struct entry_s entry_t;
+typedef struct s_entry	t_entry;
 
-struct hashtable_s {
-	int size;
-	struct entry_s **table;	
+struct		s_hashtable
+{
+	int				size;
+	struct s_entry	**table;
 };
 
-typedef struct hashtable_s hashtable_t;
+typedef struct s_hashtable	t_hashtable;
 
-hashtable_t *ht_create(int size);
-void		ht_free(hashtable_t *hashtable);
-int 		ht_hash(hashtable_t *hashtable, char *key);
-entry_t 	*ht_newpair( char *key, char *value );
-void 		ht_set(hashtable_t *hashtable, char *key, char *value);
-char 		*ht_get(hashtable_t *hashtable, char *key);
+t_hashtable	*ht_create(int size);
+void		ht_free(t_hashtable *hashtable);
+int			ht_hash(t_hashtable *hashtable, char *key);
+t_entry		*ht_newpair(char *key, char *value);
+void		ht_set(t_hashtable *hashtable, char *key, char *value);
+char		*ht_get(t_hashtable *hashtable, char *key);
+
+#endif
