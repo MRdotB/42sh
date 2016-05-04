@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:12:56 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 12:57:50 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 17:52:09 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ void	bc_env(char **path)
 
 void	bc_getenv(char **path)
 {
+	char	*get;
+
 	if (path[1] == NULL)
 		return (bc_error("getenv: missing arg."));
 	else if (path[2])
 		return (bc_error("getenv: too much args."));
-	if (!(get_env(path[1])))
-		bc_error("getenv: variable not found in env.");
+	if (!(get = get_env(path[1])))
+		return (bc_error("getenv: variable not found in env."));
+	ft_putendl(get);
 }
 
 void	bc_unsetenv(char **path)
