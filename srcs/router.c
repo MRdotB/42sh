@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 16:39:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 14:43:15 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 19:25:16 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ static	int	entry_binary(char **entry)
 	pid_t	father;
 	char	**env;
 
-	if (ft_strncmp("./", entry[0], 2) != 0)
+	if ((ft_strncmp("./", entry[0], 2) != 0) && entry[0][0] != '/')
 		return (0);
-	if (access(entry[0], F_OK) == -1)
-		bc_error_file("./: not found ", entry[0]);
+	if (access(entry[0], F_OK) == -1 || ft_strcmp("/", entry[0]) == 0)
+		bc_error_file("exec: not found ", entry[0]);
 	else if (access(entry[0], X_OK) == -1)
-		bc_error_file("./: cannot execute ", entry[0]);
+		bc_error_file("exec: cannot execute ", entry[0]);
 	else
 	{
 		father = fork();
