@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 11:45:13 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 13:05:00 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 14:38:47 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void		hash_binaries(void)
 
 	g_hashtable = ht_create(2048);
 	i = -1;
+	if (get_path() == NULL)
+		return ;
 	paths = ft_strsplit(get_path(), ':');
 	while (paths[++i])
 	{
