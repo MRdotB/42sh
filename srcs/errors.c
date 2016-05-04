@@ -6,11 +6,11 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 14:15:04 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/04/29 14:19:13 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 12:58:39 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "bcsh.h"
 
 void	bc_error(char *error_msg)
 {
