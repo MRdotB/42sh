@@ -1,7 +1,19 @@
-#include "42sh.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hash_binaries.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/04 11:45:13 by bchaleil          #+#    #+#             */
+/*   Updated: 2016/05/04 13:05:00 by bchaleil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "bcsh.h"
 
 t_env		*g_head;
-hashtable_t	*g_hashtable;
+t_hashtable	*g_hashtable;
 
 static char	*get_path(void)
 {
@@ -35,7 +47,8 @@ void		hash_binaries(void)
 			{
 				value = ft_strjoin(paths[i], "/");
 				value = ft_concat(value, d->d_name, 1);
-				ht_set(g_hashtable, d->d_name, value);
+				if (access(value, F_OK) == 0 || access(value, X_OK) == 0)
+					ht_set(g_hashtable, d->d_name, value);
 				free(value);
 			}
 		closedir(dir);
