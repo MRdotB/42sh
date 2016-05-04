@@ -1,11 +1,22 @@
-#include "hashtable.h"
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hashtable_ex.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/04 11:46:09 by bchaleil          #+#    #+#             */
+/*   Updated: 2016/05/04 12:58:57 by bchaleil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-entry_t		*ht_newpair(char *key, char *value)
+#include "bcsh.h"
+
+t_entry		*ht_newpair(char *key, char *value)
 {
-	entry_t *newpair;
+	t_entry *newpair;
 
-	if ((newpair = malloc(sizeof(entry_t))) == NULL)
+	if ((newpair = malloc(sizeof(t_entry))) == NULL)
 		return (NULL);
 	if ((newpair->key = ft_strdup(key)) == NULL)
 		return (NULL);
@@ -15,7 +26,7 @@ entry_t		*ht_newpair(char *key, char *value)
 	return (newpair);
 }
 
-static void	ht_set_ex(entry_t *newpair, entry_t *next, entry_t *last)
+static void	ht_set_ex(t_entry *newpair, t_entry *next, t_entry *last)
 {
 	if (next == NULL)
 		last->next = newpair;
@@ -26,12 +37,12 @@ static void	ht_set_ex(entry_t *newpair, entry_t *next, entry_t *last)
 	}
 }
 
-void		ht_set(hashtable_t *hashtable, char *key, char *value)
+void		ht_set(t_hashtable *hashtable, char *key, char *value)
 {
 	int		bin;
-	entry_t	*newpair;
-	entry_t	*next;
-	entry_t	*last;
+	t_entry	*newpair;
+	t_entry	*next;
+	t_entry	*last;
 
 	bin = ht_hash(hashtable, key);
 	next = hashtable->table[bin];
@@ -55,10 +66,10 @@ void		ht_set(hashtable_t *hashtable, char *key, char *value)
 		ht_set_ex(newpair, next, last);
 }
 
-char		*ht_get(hashtable_t *hashtable, char *key)
+char		*ht_get(t_hashtable *hashtable, char *key)
 {
 	int		bin;
-	entry_t	*pair;
+	t_entry	*pair;
 
 	bin = ht_hash(hashtable, key);
 	pair = hashtable->table[bin];

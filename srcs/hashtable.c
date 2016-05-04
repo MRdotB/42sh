@@ -6,23 +6,22 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:58:10 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/02 19:14:18 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 12:58:51 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
-#include "libft.h"
+#include "bcsh.h"
 
-hashtable_t	*ht_create(int size)
+t_hashtable	*ht_create(int size)
 {
-	hashtable_t	*hashtable;
+	t_hashtable	*hashtable;
 	int			i;
 
 	if (size < 1)
 		return (NULL);
-	if ((hashtable = malloc(sizeof(hashtable_t))) == NULL)
+	if ((hashtable = malloc(sizeof(t_hashtable))) == NULL)
 		return (NULL);
-	if ((hashtable->table = malloc(sizeof(entry_t*) * size)) == NULL)
+	if ((hashtable->table = malloc(sizeof(t_entry*) * size)) == NULL)
 		return (NULL);
 	i = 0;
 	while (i < size)
@@ -31,11 +30,11 @@ hashtable_t	*ht_create(int size)
 	return (hashtable);
 }
 
-void	ht_free(hashtable_t *hashtable)
+void		ht_free(t_hashtable *hashtable)
 {
 	int		i;
-	entry_t	*tmp;
-	entry_t	*next;
+	t_entry	*tmp;
+	t_entry	*next;
 
 	i = -1;
 	while (++i < hashtable->size)
@@ -57,7 +56,7 @@ void	ht_free(hashtable_t *hashtable)
 	free(hashtable);
 }
 
-int		ht_hash(hashtable_t *hashtable, char *key)
+int			ht_hash(t_hashtable *hashtable, char *key)
 {
 	size_t	i;
 	size_t	hashval;
@@ -78,5 +77,3 @@ int		ht_hash(hashtable_t *hashtable, char *key)
 	hashval += (hashval << 15);
 	return (hashval % hashtable->size);
 }
-
-
