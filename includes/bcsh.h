@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 15:58:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 12:57:52 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 17:10:40 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void				free_double_tab(char **tab);
 void				clean_env(void);
 void				display_env(void);
 void				set_env(char *key, char *value);
-int					get_env(char *key);
+char				*get_env(char *key);
 int					unset_env(char *key);
 
 void				hash_binaries(void);
