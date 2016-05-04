@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:10:46 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 12:58:06 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/04 15:30:03 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,20 @@ void	bc_cd(char **path)
 
 void	bc_exit(char **path)
 {
+	int	e;
+
+	e = 0;
 	if (*path)
 	{
 		clean_env();
 		ht_free(g_hashtable);
-		exit(0);
+		if (path[1])
+			e = ft_atoi(path[1]);
+		if (e <= 0)
+			exit(0);
+		if (e >= 255)
+			exit(255);
+		exit(e);
 	}
 }
 
