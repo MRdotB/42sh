@@ -69,8 +69,8 @@ void	bc_exit(char **path)
 			e = 0;
 		if (e >= 255)
 			e = 255;
-		free_double_tab(path);
 	}
+	free_double_tab(path);
 	clean_env();
 	ht_free(g_hashtable);
 	exit(e);
