@@ -12,6 +12,8 @@
 
 #include "bcsh.h"
 
+t_hashtable		*g_hashtable;
+
 static void	shellception(void)
 {
 	char	*lvl;
@@ -40,5 +42,7 @@ int			main(int ac, char **av, char **env)
 	prompt_size = ft_strlen(PROMPT);
 	while (write(1, PROMPT, prompt_size) && (ft_gnl(0, &line) != 0))
 		router(line);
+	clean_env();
+	ht_free(g_hashtable);
 	return (0);
 }
