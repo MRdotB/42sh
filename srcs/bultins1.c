@@ -57,23 +57,23 @@ void	bc_exit(char **path)
 {
 	int	e;
 
-	e = 0;
 	if (!path[1])
-		exit(e);
+		e = 0;
 	else if (path[2])
-		bc_error("exit: Too much args. usage: exit value");
+		return (bc_error("exit: Too much args. usage: exit value"));
 	else
 	{
-		clean_env();
-		ht_free(g_hashtable);
 		if (path[1])
 			e = ft_atoi(path[1]);
 		if (e <= 0)
-			exit(0);
+			e = 0;
 		if (e >= 255)
-			exit(255);
-		exit(e);
+			e = 255;
+		free_double_tab(path);
 	}
+	clean_env();
+	ht_free(g_hashtable);
+	exit(e);
 }
 
 void	bc_clear(char **path)
