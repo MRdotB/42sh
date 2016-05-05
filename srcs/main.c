@@ -27,7 +27,7 @@ static void	shellception(void)
 		free(itoa);
 	}
 	else
-		set_env("SHLVL", "0");
+		set_env("SHLVL", "1");
 }
 
 int			main(int ac, char **av, char **env)
