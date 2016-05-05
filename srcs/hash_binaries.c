@@ -15,20 +15,6 @@
 t_env		*g_head;
 t_hashtable	*g_hashtable;
 
-static char	*get_path(void)
-{
-	t_env	*cpy;
-
-	cpy = g_head;
-	while (cpy)
-	{
-		if (ft_strcmp(cpy->key, "PATH") == 0)
-			return (cpy->value);
-		cpy = cpy->next;
-	}
-	return (NULL);
-}
-
 void		hash_binaries(void)
 {
 	char			*value;
@@ -39,9 +25,9 @@ void		hash_binaries(void)
 
 	g_hashtable = ht_create(2048);
 	i = -1;
-	if (get_path() == NULL)
+	if (get_env("PATH") == NULL)
 		return ;
-	paths = ft_strsplit(get_path(), ':');
+	paths = ft_strsplit(get_env("PATH"), ':');
 	while (paths[++i])
 	{
 		if ((dir = opendir(paths[i])) != 0)
