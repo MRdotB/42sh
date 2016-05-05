@@ -65,4 +65,6 @@ void				bc_unsetenv(char **path);
 void				bc_error(char *error_msg);
 void				bc_error_file(char *error_msg, char *file);
 
+char				*tilde_replace(char *src);
+
 #endif
