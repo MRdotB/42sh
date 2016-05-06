@@ -93,13 +93,13 @@ void		router(char *line)
 {
 	char		**entry;
 
-	if (*line == '\0')
+	entry = ft_strsplitstr(line, " \t");
+	free(line);
+	if (*entry == NULL)
 	{
-		free(line);
+		free_double_tab(entry);
 		return ;
 	}
-	entry = ft_strsplit(line, ' ');
-	free(line);
 	if (!entry_binary(entry))
 		if (!builtin(entry))
 			path_binary(entry);
