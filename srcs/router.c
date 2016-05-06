@@ -59,7 +59,7 @@ static int	path_binary(char **entry)
 		if (father)
 			wait(&father);
 		else
-			execve(value, entry, env);
+			execve(value, av_parse(entry), env);
 		free_double_tab(env);
 	}
 	return (1);
@@ -83,7 +83,7 @@ static	int	entry_binary(char **entry)
 		if (father)
 			wait(&father);
 		else
-			execve(entry[0], entry, env);
+			execve(entry[0], av_parse(entry), env);
 		free_double_tab(env);
 	}
 	return (1);
