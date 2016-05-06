@@ -24,6 +24,17 @@ SRCS			=	srcs/main.c srcs/router.c srcs/bultins1.c \
 
 OBJS			=	$(SRCS:srcs/%.c=obj/%.o)
 
+# Get system and set specific flags accordingly
+
+ARCH	= $(shell uname -m)
+OS		= $(shell uname -s)
+
+ifeq ($(OS)_$(ARCH), Linux_x86_64)
+	FLAGS += -D LINUX
+else ifeq ($(OS), Linux)
+	FLAGS += -D LINUX
+endif
+
 all: obj $(NAME)
 
 $(LIB):
