@@ -12,13 +12,6 @@
 
 #include "bcsh.h"
 
-void	bc_env(char **path)
-{
-	if (path[1])
-		return (bc_error("env: Too much args."));
-	display_env();
-}
-
 void	bc_getenv(char **path)
 {
 	char	*get;
