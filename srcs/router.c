@@ -65,13 +65,17 @@ static int	path_binary(t_cfg *cfg, char **entry)
 
 static	int	entry_binary(t_cfg *cfg, char **entry)
 {
-	pid_t	father;
-	char	**env;
+	pid_t			father;
+	char			**env;
+	struct stat		fs;
 
+	lstat(entry[0], &fs);
 	if ((ft_strncmp("./", entry[0], 2) != 0) && entry[0][0] != '/')
 		return (0);
 	if (access(entry[0], F_OK) == -1 || ft_strcmp("/", entry[0]) == 0)
 		bc_error_file("exec: not found ", entry[0]);
+	else if (S_ISDIR(fs.st_mode))
+		bc_error_file("exec: cannot execute a directory ", entry[0]);
 	else if (access(entry[0], X_OK) == -1)
 		bc_error_file("exec: cannot execute ", entry[0]);
 	else
