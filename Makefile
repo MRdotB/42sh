@@ -19,7 +19,7 @@ LIB_LINK		=	-L $(LIB_PATH) -lft
 INCLUDES		=	-I ./includes -I ./libft/includes
 SRCS			=	srcs/main.c srcs/router.c srcs/bultins1.c \
 					srcs/bultins2.c srcs/errors.c srcs/env_controller.c\
-					srcs/env_controller_ex.c srcs/hashtable.c srcs/hashtable_ex.c\
+					srcs/env_controller_ex.c\
 					srcs/hash_binaries.c srcs/str_utility.c srcs/builtin_env.c
 
 OBJS			=	$(SRCS:srcs/%.c=obj/%.o)

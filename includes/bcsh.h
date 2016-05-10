@@ -14,7 +14,6 @@
 # define BCSH_H
 
 # include "libft.h"
-# include "hashtable.h"
 
 # include <stdio.h>
 # include <stdlib.h>
