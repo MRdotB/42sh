@@ -1,12 +1,12 @@
 
 #include "bcsh.h"
 
-static char	*tilde_replace(char *src)
+static char	*tilde_replace(t_cfg *cfg, char *src)
 {
 	char	*home;
 	char	*r;
 
-	home = get_env("HOME");
+	home = get_env(cfg->env, "HOME");
 	if (home == NULL || src == NULL)
 		return (src);
 	if (ft_strcmp("~", src) == 0)
@@ -23,14 +23,14 @@ static char	*tilde_replace(char *src)
 	return (src);
 }
 
-char		**av_parse(char	**av)
+char		**av_parse(t_cfg *cfg, char	**av)
 {
 	int	i;
 
 	i = 1;
 	while (av[i])
 	{
-		av[i] = tilde_replace(av[i]);
+		av[i] = tilde_replace(cfg, av[i]);
 		i++;
 	}
 	return (av);

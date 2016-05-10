@@ -12,10 +12,7 @@
 
 #include "bcsh.h"
 
-t_env		*g_head;
-t_hashtable	*g_hashtable;
-
-void		hash_binaries(void)
+void	hash_binaries(t_cfg *cfg)
 {
 	char			*value;
 	char			**paths;
@@ -23,11 +20,11 @@ void		hash_binaries(void)
 	struct dirent	*d;
 	DIR				*dir;
 
-	g_hashtable = ht_create(2048);
+	cfg->binary = ht_create(2048);
 	i = -1;
-	if (get_env("PATH") == NULL)
+	if (get_env(cfg->env, "PATH") == NULL)
 		return ;
-	paths = ft_strsplit(get_env("PATH"), ':');
+	paths = ft_strsplit(get_env(cfg->env, "PATH"), ':');
 	while (paths[++i])
 	{
 		if ((dir = opendir(paths[i])) != 0)
@@ -36,7 +33,7 @@ void		hash_binaries(void)
 				value = ft_strjoin(paths[i], "/");
 				value = ft_concat(value, d->d_name, 1);
 				if (access(value, F_OK) == 0 || access(value, X_OK) == 0)
-					ht_set(g_hashtable, d->d_name, value);
+					ht_set(cfg->binary, d->d_name, value);
 				free(value);
 			}
 		closedir(dir);

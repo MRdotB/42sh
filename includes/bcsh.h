@@ -40,30 +40,36 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-void				env_init(char **env);
-char				**env_to_tab(void);
+typedef struct		s_cfg
+{
+	t_env			*env;	
+	t_hashtable		*binary;
+}					t_cfg;
+
+t_env				*env_init(char **env);
+char				**env_to_tab(t_env *env);
 void				free_double_tab(char **tab);
-void				clean_env(void);
-void				display_env(void);
-void				set_env(char *key, char *value);
-char				*get_env(char *key);
-int					unset_env(char *key);
+void				clean_env(t_env *head);
+void				display_env(t_env *head);
+void				set_env(t_env **head, char *key, char *value);
+char				*get_env(t_env *head, char *key);
+int					unset_env(t_env **head, char *key);
 
-void				hash_binaries(void);
+void				hash_binaries(t_cfg *cfg);
 
-void				router(char *line);
-void				bc_cd(char **path);
-void				bc_exit(char **path);
-void				bc_clear(char **path);
-void				bc_pwd(char **path);
-void				bc_env(char **path);
-void				bc_getenv(char **path);
-void				bc_setenv(char **path);
-void				bc_unsetenv(char **path);
+void				router(t_cfg *cfg, char *line);
+void				bc_cd(t_cfg *cfg, char **path);
+void				bc_exit(t_cfg *cfg, char **path);
+void				bc_clear(t_cfg *cfg, char **path);
+void				bc_pwd(t_cfg *cfg, char **path);
+void				bc_env(t_cfg *cfg, char **path);
+void				bc_getenv(t_cfg *cfg, char **path);
+void				bc_setenv(t_cfg *cfg, char **path);
+void				bc_unsetenv(t_cfg *cfg, char **path);
 
 void				bc_error(char *error_msg);
 void				bc_error_file(char *error_msg, char *file);
 
-char				**av_parse(char	**av);
+char				**av_parse(t_cfg *cfg, char	**av);
 
 #endif

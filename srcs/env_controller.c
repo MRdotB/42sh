@@ -12,8 +12,6 @@
 
 #include "bcsh.h"
 
-t_env		*g_head;
-
 static t_env	*new_elem(char *env)
 {
 	t_env	*r;
@@ -42,21 +40,21 @@ static t_env	*push_front(t_env *lst, t_env *el)
 	return (el);
 }
 
-char			**env_to_tab(void)
+char			**env_to_tab(t_env *head)
 {
 	t_env	*cpy;
 	int		i;
 	char	**r;
 	char	*el;
 
-	cpy = g_head;
+	cpy = head;
 	i = 0;
 	while (cpy)
 	{
 		i++;
 		cpy = cpy->next;
 	}
-	cpy = g_head;
+	cpy = head;
 	if (!(r = (char**)ft_memalloc(sizeof(char*) * (i + 1))))
 		return (NULL);
 	i = 0;
@@ -80,14 +78,16 @@ void			free_double_tab(char **tab)
 	free(tab);
 }
 
-void			env_init(char **env)
+t_env			*env_init(char **env)
 {
 	int		i;
+	t_env	*head;
 
-	g_head = NULL;
+	head = NULL;
 	i = 0;
 	while (env[i])
 		i++;
 	while (i > 0)
-		g_head = push_front(g_head, new_elem(env[--i]));
+		head = push_front(head, new_elem(env[--i]));
+	return (head);
 }

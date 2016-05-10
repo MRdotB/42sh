@@ -12,12 +12,10 @@
 
 #include "bcsh.h"
 
-t_hashtable	*g_hashtable;
-
-static int	builtin(char **entry)
+static int	builtin(t_cfg *cfg, char **entry)
 {
 	int			i;
-	static void	(*f[8])(char **entry) =
+	static void	(*f[])(t_cfg *cfg, char **entry) =
 	{ bc_cd, bc_exit, bc_clear, bc_pwd, bc_env, bc_getenv, bc_setenv,
 		bc_unsetenv };
 	static char	*bultins[] =
@@ -29,7 +27,7 @@ static int	builtin(char **entry)
 	{
 		if (ft_strcmp(bultins[i], entry[0]) == 0)
 		{
-			f[i](entry);
+			f[i](cfg, entry);
 			return (1);
 		}
 		i++;
@@ -37,13 +35,13 @@ static int	builtin(char **entry)
 	return (0);
 }
 
-static int	path_binary(char **entry)
+static int	path_binary(t_cfg *cfg, char **entry)
 {
 	pid_t	father;
 	char	**env;
 	char	*value;
 
-	if ((value = ht_get(g_hashtable, entry[0])) == NULL)
+	if ((value = ht_get(cfg->binary, entry[0])) == NULL)
 	{
 		bc_error_file("command not found: ", entry[0]);
 		return (0);
@@ -55,17 +53,17 @@ static int	path_binary(char **entry)
 	else
 	{
 		father = fork();
-		env = env_to_tab();
+		env = env_to_tab(cfg->env);
 		if (father)
 			wait(&father);
 		else
-			execve(value, av_parse(entry), env);
+			execve(value, av_parse(cfg, entry), env);
 		free_double_tab(env);
 	}
 	return (1);
 }
 
-static	int	entry_binary(char **entry)
+static	int	entry_binary(t_cfg *cfg, char **entry)
 {
 	pid_t	father;
 	char	**env;
@@ -79,17 +77,17 @@ static	int	entry_binary(char **entry)
 	else
 	{
 		father = fork();
-		env = env_to_tab();
+		env = env_to_tab(cfg->env);
 		if (father)
 			wait(&father);
 		else
-			execve(entry[0], av_parse(entry), env);
+			execve(entry[0], av_parse(cfg, entry), env);
 		free_double_tab(env);
 	}
 	return (1);
 }
 
-void		router(char *line)
+void		router(t_cfg *cfg, char *line)
 {
 	char		**entry;
 
@@ -100,8 +98,8 @@ void		router(char *line)
 		free_double_tab(entry);
 		return ;
 	}
-	if (!entry_binary(entry))
-		if (!builtin(entry))
-			path_binary(entry);
+	if (!entry_binary(cfg, entry))
+		if (!builtin(cfg, entry))
+			path_binary(cfg, entry);
 	free_double_tab(entry);
 }

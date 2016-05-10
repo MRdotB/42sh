@@ -15,12 +15,12 @@ static void	help(void)
 	//clean all
 }
 
-void		bc_env(char **path)
+void		bc_env(t_cfg *cfg, char **path)
 {
 	int	i;
 
 	if (path[1] == NULL)
-		return (display_env());
+		return (display_env(cfg->env));
 	i = 1;
 	while (path[i])
 	{

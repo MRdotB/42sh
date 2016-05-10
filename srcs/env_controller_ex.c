@@ -14,25 +14,25 @@
 
 t_env	*g_head;
 
-void	clean_env(void)
+void	clean_env(t_env *head)
 {
 	t_env	*tmp;
 
-	while (g_head)
+	while (head)
 	{
-		free(g_head->key);
-		free(g_head->value);
-		tmp = g_head->next;
-		free(g_head);
-		g_head = tmp;
+		free(head->key);
+		free(head->value);
+		tmp = head->next;
+		free(head);
+		head = tmp;
 	}
 }
 
-void	display_env(void)
+void	display_env(t_env *head)
 {
 	t_env	*cpy;
 
-	cpy = g_head;
+	cpy = head;
 	while (cpy)
 	{
 		ft_putstr(cpy->key);
@@ -42,13 +42,13 @@ void	display_env(void)
 	}
 }
 
-void	set_env(char *key, char *value)
+void	set_env(t_env **head, char *key, char *value)
 {
 	t_env	*cpy;
 
 	if (value == NULL)
 		return ;
-	cpy = g_head;
+	cpy = *head;
 	while (cpy)
 	{
 		if (ft_strcmp(cpy->key, key) == 0)
@@ -63,15 +63,15 @@ void	set_env(char *key, char *value)
 		return ;
 	cpy->key = ft_strdup(key);
 	cpy->value = ft_strdup(value);
-	cpy->next = g_head;
-	g_head = cpy;
+	cpy->next = *head;
+	*head = cpy;
 }
 
-char	*get_env(char *key)
+char	*get_env(t_env *head, char *key)
 {
 	t_env	*cpy;
 
-	cpy = g_head;
+	cpy = head;
 	while (cpy)
 	{
 		if (ft_strcmp(cpy->key, key) == 0)
@@ -81,19 +81,19 @@ char	*get_env(char *key)
 	return (NULL);
 }
 
-int		unset_env(char *key)
+int		unset_env(t_env **head, char *key)
 {
 	t_env	*cpy;
 	t_env	*prev;
 
-	cpy = g_head;
+	cpy = *head;
 	prev = NULL;
 	while (cpy)
 	{
 		if (ft_strcmp(cpy->key, key) == 0)
 		{
 			if (prev == NULL)
-				g_head = g_head->next;
+				*head = (*head)->next;
 			else
 				prev->next = cpy->next;
 			free(cpy->key);
