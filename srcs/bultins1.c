@@ -33,16 +33,20 @@ static void	bc_cd_ex(t_cfg *cfg, char *go_to)
 void	bc_cd(t_cfg *cfg, char **path)
 {
 	char	*home;
+	char	*prev;
 	char	*go_to;
 
 	go_to = NULL;
-	home = get_env(cfg->env, "HOME");
+	if (!(home = get_env(cfg->env, "HOME")))
+		home = "~";
+	if (!(prev = get_env(cfg->env, "OLDPWD")))
+		prev = "-";
 	if (path[1] && path[2])
 		bc_error("cd: Too much args. usage: cd dirname");
 	else if (!path[1] || (path[1][0] == '~' && path[1][1] == '\0'))
 		go_to = ft_strdup(home);
 	else if (path[1][0] == '-' && path[1][1] == '\0')
-		go_to = ft_strdup(get_env(cfg->env, "OLDPWD"));
+		go_to = ft_strdup(prev);
 	else if (ft_strncmp("~/", path[1], 2) == 0)
 		go_to = ft_concat(home, path[1] + 1, 0);
 	else
