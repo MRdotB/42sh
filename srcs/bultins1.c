@@ -37,7 +37,7 @@ void	bc_cd(t_cfg *cfg, char **path)
 
 	go_to = NULL;
 	home = get_env(cfg->env, "HOME");
-	if (path[2])
+	if (path[1] && path[2])
 		bc_error("cd: Too much args. usage: cd dirname");
 	else if (!path[1] || (path[1][0] == '~' && path[1][1] == '\0'))
 		go_to = ft_strdup(home);
