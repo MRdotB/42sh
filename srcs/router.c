@@ -35,7 +35,7 @@ static int	builtin(t_cfg *cfg, char **entry)
 	return (0);
 }
 
-static int	path_binary(t_cfg *cfg, char **entry)
+int	path_binary(t_cfg *cfg, char **entry)
 {
 	pid_t	father;
 	char	**env;
@@ -63,7 +63,7 @@ static int	path_binary(t_cfg *cfg, char **entry)
 	return (1);
 }
 
-static	int	entry_binary(t_cfg *cfg, char **entry)
+int	entry_binary(t_cfg *cfg, char **entry)
 {
 	pid_t			father;
 	char			**env;
