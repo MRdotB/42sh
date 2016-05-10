@@ -72,4 +72,7 @@ void				bc_error_file(char *error_msg, char *file);
 
 char				**av_parse(t_cfg *cfg, char	**av);
 
+int					entry_binary(t_cfg *cfg, char **entry);
+int					path_binary(t_cfg *cfg, char **entry);
+
 #endif
