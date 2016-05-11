@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 15:58:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/11 17:47:11 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/11 18:21:36 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_cfg
 {
 	t_env			*env;
 	t_hashtable		*binary;
+	char			**cmd;
 }					t_cfg;
 
 t_env				*env_init(char **env);

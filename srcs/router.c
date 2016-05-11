@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 16:39:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/11 17:44:18 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/11 18:24:02 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void		router(t_cfg *cfg, char *line)
 
 	i = 0;
 	cmd = ft_strsplit(line, ';');
+	cfg->cmd = cmd;
+	free(line);
 	if (*cmd == NULL)
 	{
 		free_double_tab(cmd);
@@ -107,12 +109,12 @@ void		router(t_cfg *cfg, char *line)
 	while (cmd[i])
 	{
 		entry = ft_strsplitstr(cmd[i], " \t");
-		if (!entry_binary(cfg, entry))
-			if (!builtin(cfg, entry))
-				path_binary(cfg, entry);
+		if (*entry)
+			if (!entry_binary(cfg, entry))
+				if (!builtin(cfg, entry))
+					path_binary(cfg, entry);
 		free_double_tab(entry);
 		i++;
 	}
-	free_double_tab(cmd);
-	free(line);
+	free_double_tab(cfg->cmd);
 }

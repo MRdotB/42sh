@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:10:46 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/11 17:41:28 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/11 18:22:42 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		bc_exit(t_cfg *cfg, char **path)
 			e = 255;
 	}
 	free_double_tab(path);
+	free_double_tab(cfg->cmd);
 	clean_env(cfg->env);
 	ht_free(cfg->binary);
 	exit(e);
