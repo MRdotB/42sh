@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 14:15:04 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 12:58:39 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/11 17:46:17 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,16 @@ void	bc_error_file(char *error_msg, char *file)
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd(RESET, 2);
 	ft_putchar('\n');
+}
+
+int		help(void)
+{
+	ft_putstr("Usage: env [OPTION]... [-] [NAME=VALUE]...");
+	ft_putendl("[COMMAND [ARG]...];");
+	ft_putendl("Set each NAME to VALUE in the environment and run COMMAND.");
+	ft_putendl("  -i  start with an empty environment");
+	ft_putendl("  -u  remove variable from the environment");
+	ft_putendl("  -h  display this help and exit");
+	ft_putendl("If no COMMAND, print the resulting environment.");
+	return (0);
 }

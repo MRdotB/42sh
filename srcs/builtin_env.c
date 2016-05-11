@@ -1,17 +1,16 @@
 /* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/11 17:41:49 by bchaleil          #+#    #+#             */
+/*   Updated: 2016/05/11 17:45:01 by bchaleil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "bcsh.h"
-
-static int		help(void)
-{
-	ft_putendl("Usage: env [OPTION]... [-] [NAME=VALUE]... [COMMAND [ARG]...];");
-	ft_putendl("Set each NAME to VALUE in the environment and run COMMAND.");
-	ft_putendl("  -i  start with an empty environment");
-	ft_putendl("  -u  remove variable from the environment");
-	ft_putendl("  -h  display this help and exit");
-	ft_putendl("If no COMMAND, print the resulting environment.");
-	return (0);
-}
 
 static t_env	*env_cpy(t_env *origin)
 {
@@ -103,7 +102,7 @@ void			bc_env(t_cfg *cfg, char **path)
 		else if (ft_strcmp("-u", path[i]) == 0)
 			unset_env(&cpy, path[++i]);
 		else if (ft_strcmp("--", path[i++]) == 0)
-			break;
+			break ;
 		i++;
 	}
 	bc_env_set(&cpy, path, &i);

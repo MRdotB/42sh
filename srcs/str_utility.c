@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_utility.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/11 17:43:32 by bchaleil          #+#    #+#             */
+/*   Updated: 2016/05/11 17:44:40 by bchaleil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "bcsh.h"
 
@@ -23,7 +34,7 @@ static char	*tilde_replace(t_cfg *cfg, char *src)
 	return (src);
 }
 
-char		**av_parse(t_cfg *cfg, char	**av)
+char		**av_parse(t_cfg *cfg, char **av)
 {
 	int	i;
 

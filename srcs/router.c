@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 16:39:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 19:28:14 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/11 17:44:18 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	builtin(t_cfg *cfg, char **entry)
 	return (0);
 }
 
-int	path_binary(t_cfg *cfg, char **entry)
+int			path_binary(t_cfg *cfg, char **entry)
 {
 	pid_t	father;
 	char	**env;
@@ -63,7 +63,7 @@ int	path_binary(t_cfg *cfg, char **entry)
 	return (1);
 }
 
-int	entry_binary(t_cfg *cfg, char **entry)
+int			entry_binary(t_cfg *cfg, char **entry)
 {
 	pid_t			father;
 	char			**env;

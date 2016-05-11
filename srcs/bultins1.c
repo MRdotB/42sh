@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 13:10:46 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 19:12:41 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/11 17:41:28 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	bc_cd_ex(t_cfg *cfg, char *go_to)
 	free(go_to);
 }
 
-void	bc_cd(t_cfg *cfg, char **path)
+void		bc_cd(t_cfg *cfg, char **path)
 {
 	char	*home;
 	char	*prev;
@@ -54,10 +54,11 @@ void	bc_cd(t_cfg *cfg, char **path)
 	bc_cd_ex(cfg, go_to);
 }
 
-void	bc_exit(t_cfg *cfg, char **path)
+void		bc_exit(t_cfg *cfg, char **path)
 {
 	int	e;
 
+	e = 0;
 	if (!path[1])
 		e = 0;
 	else if (path[2])
@@ -77,7 +78,7 @@ void	bc_exit(t_cfg *cfg, char **path)
 	exit(e);
 }
 
-void	bc_clear(t_cfg *cfg, char **path)
+void		bc_clear(t_cfg *cfg, char **path)
 {
 	const char	*clear_screen_ansi;
 
@@ -87,7 +88,7 @@ void	bc_clear(t_cfg *cfg, char **path)
 	ft_putstr_fd(clear_screen_ansi, STDOUT_FILENO);
 }
 
-void	bc_pwd(t_cfg *cfg, char **path)
+void		bc_pwd(t_cfg *cfg, char **path)
 {
 	char	current[PATH_MAX];
 

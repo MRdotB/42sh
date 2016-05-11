@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 15:58:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/04 17:10:40 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/11 17:47:11 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct		s_env
 
 typedef struct		s_cfg
 {
-	t_env			*env;	
+	t_env			*env;
 	t_hashtable		*binary;
 }					t_cfg;
 
@@ -69,6 +69,7 @@ void				bc_unsetenv(t_cfg *cfg, char **path);
 
 void				bc_error(char *error_msg);
 void				bc_error_file(char *error_msg, char *file);
+int					help(void);
 
 char				**av_parse(t_cfg *cfg, char	**av);
 
