@@ -93,17 +93,26 @@ int	entry_binary(t_cfg *cfg, char **entry)
 
 void		router(t_cfg *cfg, char *line)
 {
+	int			i;
 	char		**entry;
+	char		**cmd;
 
-	entry = ft_strsplitstr(line, " \t");
-	free(line);
-	if (*entry == NULL)
+	i = 0;
+	cmd = ft_strsplit(line, ';');
+	if (*cmd == NULL)
 	{
-		free_double_tab(entry);
+		free_double_tab(cmd);
 		return ;
 	}
-	if (!entry_binary(cfg, entry))
-		if (!builtin(cfg, entry))
-			path_binary(cfg, entry);
-	free_double_tab(entry);
+	while (cmd[i])
+	{
+		entry = ft_strsplitstr(cmd[i], " \t");
+		if (!entry_binary(cfg, entry))
+			if (!builtin(cfg, entry))
+				path_binary(cfg, entry);
+		free_double_tab(entry);
+		i++;
+	}
+	free_double_tab(cmd);
+	free(line);
 }
