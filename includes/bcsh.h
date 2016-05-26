@@ -6,7 +6,7 @@
 /*   By: bchaleil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 15:58:58 by bchaleil          #+#    #+#             */
-/*   Updated: 2016/05/11 18:21:36 by bchaleil         ###   ########.fr       */
+/*   Updated: 2016/05/26 17:15:04 by bchaleil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # include <limits.h>
 # include <dirent.h>
 # include <sys/stat.h>
+
+# include <termios.h>
+# include <term.h>
+# include <stdio.h>
+# include <signal.h>
+# include <sys/ioctl.h>
 
 # ifdef __unix__
 #  include <linux/limits.h>
@@ -44,6 +50,8 @@ typedef struct		s_cfg
 {
 	t_env			*env;
 	t_hashtable		*binary;
+	char			*curr_line;
+	char			**history;
 	char			**cmd;
 }					t_cfg;
 
@@ -76,5 +84,10 @@ char				**av_parse(t_cfg *cfg, char	**av);
 
 int					entry_binary(t_cfg *cfg, char **entry);
 int					path_binary(t_cfg *cfg, char **entry);
+
+void				term_setup(struct termios **config, int ti);
+void				term_restore(struct termios **config);
+void				term_clear(void);
+int					termsize(int xy);
 
 #endif

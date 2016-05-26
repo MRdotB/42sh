@@ -6,7 +6,7 @@
 #    By: bchaleil <hello@baptistechaleil.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/12 16:21:36 by bchaleil          #+#    #+#              #
-#    Updated: 2016/05/02 11:27:50 by bchaleil         ###   ########.fr        #
+#    Updated: 2016/05/26 16:59:37 by bchaleil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ INCLUDES		=	-I ./includes -I ./libft/includes
 SRCS			=	srcs/main.c srcs/router.c srcs/bultins1.c \
 					srcs/bultins2.c srcs/errors.c srcs/env_controller.c\
 					srcs/env_controller_ex.c\
-					srcs/hash_binaries.c srcs/str_utility.c srcs/builtin_env.c
+					srcs/hash_binaries.c srcs/str_utility.c srcs/builtin_env.c\
+					srcs/term.c
 
 OBJS			=	$(SRCS:srcs/%.c=obj/%.o)
 
